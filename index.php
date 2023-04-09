@@ -1,3 +1,7 @@
+<?php
+include('php/conexao.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,16 +18,22 @@
 
 <body>
     <header>
-        <h1>DevNotes</h1>
+        <h1>Open Notes</h1>
         <div id="search-container">
             <input type="text" id="search-input" placeholder="Busque por uma nota">
             <i class="bi bi-search"></i>
         </div>
-        <button id="exports-notes">Exportar CSV <i class="bi bi-download"></i></button>
+        <button id="login">Login</button>
     </header>
+    <!-- div form export -->
+
+
     <div id="add-note-container">
         <input type="text" id="note-content" placeholder="O que deseja anotar">
         <button class="add-note"><i class="bi bi-plus-lg"></i></button>
+        <div id="exports-notes-container">
+            <button id="exports-notes">Exportar CSV <i class="bi bi-download"></i></button>
+        </div>
     </div>
     <div id="notes-container">
 

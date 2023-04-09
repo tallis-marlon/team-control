@@ -44,17 +44,17 @@ header {
     color: #bdbdbd;
 }
 
-#exports-notes {
+#login {
     background-color: #333;
-    border: 2px solid #fff;
     border-radius: 4px;
     color: #fff;
-    padding: 5px 15px;
+    padding: 10px 15px;
     cursor: pointer;
     transition: 0.2s;
+
 }
 
-#exports-notes:hover {
+#login:hover {
     background-color: #fff;
     color: #333;
 }
@@ -67,7 +67,7 @@ header {
     gap: 1rem;
 }
 
-#add-note-container input, 
+#add-note-container input,
 #add-note-container button {
     padding: 10px;
     border-radius: 5px;
@@ -85,6 +85,21 @@ header {
     background-color: #333;
     color: #fff;
 }
+
+
+/* export div */
+#exports-notes-container button {
+    padding: 10px;
+    border-radius: 5px;
+
+}
+
+#exports-notes:hover {
+    background-color: #fff;
+    color: #333;
+}
+
+
 
 /* Notas */
 
@@ -104,7 +119,7 @@ header {
     border-radius: 10px;
     color: #fff;
     position: relative;
-    
+
 
 }
 
@@ -128,7 +143,7 @@ header {
     border-radius: 3px;
 }
 
-.note:hover > i{
+.note:hover>i {
     opacity: 1;
 }
 
