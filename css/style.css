@@ -115,7 +115,7 @@ header {
     min-height: 200px;
     padding: 1rem;
     border: 1px solid #ccc;
-    background-color: #202124;
+    background-color: #999999;
     border-radius: 10px;
     color: #fff;
     position: relative;
@@ -130,6 +130,14 @@ header {
     border: none;
     height: 100%;
 
+}
+
+.note textarea::placeholder {
+    color: #fff;
+}
+
+.note textarea:focus::placeholder {
+    color: transparent;
 }
 
 .note .bi-pin {
@@ -172,5 +180,5 @@ header {
 }
 
 .note.fixed {
-    background-color: #3c3c3f;
+    background-color: #212420;
 }
