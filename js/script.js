@@ -1,4 +1,4 @@
-// Elementos
+// Elements
 
 const notesContainer = document.querySelector("#notes-container");
 
@@ -10,39 +10,21 @@ const exportBtn = document.querySelector("#exports-notes");
 
 const searchInput = document.querySelector("#search-input");
 
+
+// Local Storage
+function getNotes() {
+    const notes = JSON.parse(localStorage.getItem("notes") || "[]");
+
+    const orderedNotes = notes.sort((a, b) => (a.fixed > b.fixed ? -1 : 1));
+
+    return notes;
+}
+
+function saveNotes(notes) {
+    localStorage.setItem("notes", JSON.stringify(notes));
+}
+
 // Functions
-function showNotes(notes) {
-    cleanNotes();
-
-    notes.forEach((note) => {
-        const noteElement = createNote(note.id, note.content, note.fixed);
-        notesContainer.appendChild(noteElement);
-    });
-}
-
-function cleanNotes() {
-    notesContainer.replaceChildren([]);
-}
-
-function addNote() {
-    const notes = getNotes();
-
-    const noteObject = {
-        id: generatedId(),
-        content: noteInput.value,
-        fixed: false,
-    };
-
-    const noteElement = createNote(noteObject.id, noteObject.content);
-
-    notesContainer.appendChild(noteElement);
-
-    notes.push(noteObject);
-
-    saveNotes(notes);
-
-    noteInput.value = "";
-}
 
 function generatedId() {
     return Math.floor(Math.random() * 5000);
@@ -92,16 +74,37 @@ function createNote(id, content, fixed) {
     return element;
 }
 
-function toggleFixNote(id) {
+function showNotes(notes) {
+    cleanNotes();
+
+    notes.forEach((note) => {
+        const noteElement = createNote(note.id, note.content, note.fixed);
+        notesContainer.appendChild(noteElement);
+    });
+}
+
+function cleanNotes() {
+    notesContainer.replaceChildren([]);
+}
+
+function addNote() {
     const notes = getNotes();
 
-    const targetNote = notes.filter((note) => note.id === id)[0]
+    const noteObject = {
+        id: generatedId(),
+        content: noteInput.value,
+        fixed: false,
+    };
 
-    targetNote.fixed = !targetNote.fixed;
+    const noteElement = createNote(noteObject.id, noteObject.content);
+
+    notesContainer.appendChild(noteElement);
+
+    notes.push(noteObject);
 
     saveNotes(notes);
 
-    showNotes(getNotes());
+    noteInput.value = "";
 }
 
 function deleteNote(id, element) {
@@ -131,6 +134,12 @@ function CopyNote(id) {
     saveNotes(notes);
 }
 
+function searchNotes(searchTerm) {
+    const notes = getNotes();
+    const filteredNotes = notes.filter((note) => note.content.includes(searchTerm));
+    return filteredNotes;
+}
+
 function exportNotesToCSV() {
     const notes = getNotes();
     let csvContent = "data:text/csv;charset=utf-8," + "Note ID,Content,Fixed\n";
@@ -145,24 +154,16 @@ function exportNotesToCSV() {
     link.click();
 }
 
-function searchNotes(searchTerm) {
+function toggleFixNote(id) {
     const notes = getNotes();
-    const filteredNotes = notes.filter((note) => note.content.includes(searchTerm));
-    return filteredNotes;
-}
 
+    const targetNote = notes.filter((note) => note.id === id)[0]
 
-// Local Storage
-function getNotes() {
-    const notes = JSON.parse(localStorage.getItem("notes") || "[]");
+    targetNote.fixed = !targetNote.fixed;
 
-    const orderedNotes = notes.sort((a, b) => (a.fixed > b.fixed ? -1 : 1));
+    saveNotes(notes);
 
-    return notes;
-}
-
-function saveNotes(notes) {
-    localStorage.setItem("notes", JSON.stringify(notes));
+    showNotes(getNotes());
 }
 
 // Events
