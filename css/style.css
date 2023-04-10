@@ -44,7 +44,7 @@ header {
     color: #bdbdbd;
 }
 
-#login {
+#sair {
     background-color: #333;
     border-radius: 4px;
     color: #fff;
@@ -54,7 +54,7 @@ header {
 
 }
 
-#login:hover {
+#sair:hover {
     background-color: #fff;
     color: #333;
 }

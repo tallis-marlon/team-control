@@ -1,5 +1,5 @@
 <?php
-include('php/conexao.php');
+include('conexao.php');
 ?>
 
 <!DOCTYPE html>
@@ -12,32 +12,60 @@ include('php/conexao.php');
     <title>Document</title>
     <!--    Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
     <script src="js/script.js" defer></script>
 </head>
 
 <body>
     <header>
         <h1>Open Notes</h1>
-        <div id="search-container">
-            <input type="text" id="search-input" placeholder="Busque por uma nota">
-            <i class="bi bi-search"></i>
-        </div>
-        <button id="login">Login</button>
     </header>
-    <!-- div form export -->
-
-
-    <div id="add-note-container">
-        <input type="text" id="note-content" placeholder="O que deseja anotar">
-        <button class="add-note"><i class="bi bi-plus-lg"></i></button>
-        <div id="exports-notes-container">
-            <button id="exports-notes">Exportar CSV <i class="bi bi-download"></i></button>
-        </div>
+    <div id="login-form">
+        <h1>Acesse sua conta</h1>
+        <form action="" method="POST">
+            <p>
+                <label>E-mail</label>
+                <input type="text" name="email">
+            </p>
+            <p>
+                <label>Senha</label>
+                <input type="password" name="senha">
+            </p>
+            <p>
+                <button type="submit">Entrar</button>
+            </p>
+        </form>
     </div>
-    <div id="notes-container">
+    <?php
+    if (isset($_POST['email']) || isset($_POST['senha'])) {
+        if (isset($_POST['email']) == 0) {
+            echo "preencha seu email";
+        } else if (isset($_POST['senha']) == 0) {
+            echo "preencha sua senha";
+        } else {
+            $email = $mysqli->real_escape_string($_POST['email']);
+            $senha = $mysqli->real_escape_string($_POST['senha']);
 
-    </div>
+            $sql_code = "SELECT * FROM usuarios WHERE email = '$email' and senha = '$senha'";
+            $sql_query = $mysqli->query($sql_code) or die('Falha na execução do código SQL' . $mysql->error);
+
+            $quantidade = $sql_query->num_rows;
+        }
+
+        if ($quantidade == 1) {
+            $usuario = $sql_query->fetch_assoc();
+            if (!isset($_SESSION)) {
+                session_start();
+            }
+            $_SESSION['id'] = $usuario['id'];
+            $_SESSION['nome'] = $usuario['nome'];
+
+            header("Location: painel.php");
+        } else {
+            print "<p>Falha ao logar! E-mail ou senha incorretos</p>";
+        }
+    }
+    ?>
 </body>
 
 </html>
