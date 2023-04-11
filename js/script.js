@@ -46,6 +46,9 @@ function createNote(id, content, fixed) {
     const pinIcon = document.createElement("i");
 
     pinIcon.classList.add(...["bi", "bi-pin"]);
+    if (fixed) {
+        pinIcon.classList.add("visible");
+    }
 
     element.appendChild(pinIcon);
 
@@ -150,6 +153,20 @@ function exportNotesToCSV() {
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
     link.setAttribute("download", "notes.csv");
+    document.body.appendChild(link);
+    link.click();
+}
+
+function exportNotesToTXT() {
+    const notes = getNotes();
+    let txtContent = "data:text/plain;charset=utf-8," + "Note ID\tContent\tFixed\n";
+    notes.forEach((note) => {
+        txtContent += note.id + "\t" + note.content.replace(/\t/g, " ") + "\t" + note.fixed + "\n";
+    });
+    const encodedUri = encodeURI(txtContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "notes.txt");
     document.body.appendChild(link);
     link.click();
 }

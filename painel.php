@@ -19,11 +19,11 @@ include('protect.php')
 <body>
     <header>
         <h1>Open Notes</h1>
-        <?php echo $_SESSION['nome']; ?>
         <div id="search-container">
             <input type="text" id="search-input" placeholder="Busque por uma nota">
             <i class="bi bi-search"></i>
         </div>
+        <?php echo $_SESSION['nome']; ?>
         <button id="sair"><a href="logout.php">Sair</a></button>
     </header>
 

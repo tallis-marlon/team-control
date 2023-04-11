@@ -31,31 +31,39 @@ header {
 }
 
 #search-input {
-    background-color: #47031a;
+    background-color: #363636;
     border-radius: 3px;
     border: none;
-    padding: 10px;
+    padding: 15px 10px;
     font-weight: bold;
     color: #ddd;
-    width: 400px;
+    width: 600px;
 }
 
 #search-input::placeholder {
     color: #bdbdbd;
 }
 
+#sair a {
+    text-decoration: none;
+    color: #fff;
+}
+
 #sair {
+    text-decoration: none;
     background-color: #333;
     border-radius: 4px;
-    color: #fff;
     padding: 10px 15px;
     cursor: pointer;
     transition: 0.2s;
-
+    border: none;
 }
 
 #sair:hover {
     background-color: #fff;
+}
+
+#sair:hover a {
     color: #333;
 }
 
@@ -149,6 +157,15 @@ header {
     cursor: pointer;
     padding: 5px;
     border-radius: 3px;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+
+}
+
+.note:hover .bi-pin,
+.note .bi-pin.visible {
+    display: inline-block;
+    opacity: 1;
 }
 
 .note:hover>i {

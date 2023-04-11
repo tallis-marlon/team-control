@@ -43,11 +43,11 @@ include('conexao.php');
         } else if (isset($_POST['senha']) == 0) {
             echo "preencha sua senha";
         } else {
-            $email = $mysqli->real_escape_string($_POST['email']);
-            $senha = $mysqli->real_escape_string($_POST['senha']);
+            $email = $conn->real_escape_string($_POST['email']);
+            $senha = $conn->real_escape_string($_POST['senha']);
 
             $sql_code = "SELECT * FROM usuarios WHERE email = '$email' and senha = '$senha'";
-            $sql_query = $mysqli->query($sql_code) or die('Falha na execução do código SQL' . $mysql->error);
+            $sql_query = $conn->query($sql_code) or die('Falha na execução do código SQL' . $conn->error);
 
             $quantidade = $sql_query->num_rows;
         }
